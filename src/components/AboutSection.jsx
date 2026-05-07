@@ -1,6 +1,25 @@
+import { useState, useEffect } from "react";
 import { Briefcase, Code, User } from "lucide-react";
 
+import { API_URL } from "@/lib/config";
+
 export const AboutSection = () => {
+  const [profile, setProfile] = useState({
+    aboutDescription: "With over 5 years of experience in web development, I specialize in creating responsive, accessible, and performant web applications using modern technologies. I'm passionate about creating elegant solutions to complex problems, and I'm constantly learning new technologies and techniques to stay at the forefront of the ever-evolving web landscape.",
+    cvUrl: "",
+  });
+
+  useEffect(() => {
+    fetch(`${API_URL}/profile`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          setProfile(data);
+        }
+      })
+      .catch((err) => console.error("Error fetching profile:", err));
+  }, []);
+
   return (
     <section id="about" className="py-24 px-4 relative">
       {" "}
@@ -12,20 +31,11 @@ export const AboutSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold">
-              Passionate Web Developer & Tech Creator
+              Passionate AI/ML Engineer & Tech Creator
             </h3>
 
-            <p className="text-muted-foreground">
-              With over 5 years of experience in web development, I specialize
-              in creating responsive, accessible, and performant web
-              applications using modern technologies.
-            </p>
-
-            <p className="text-muted-foreground">
-              I'm passionate about creating elegant solutions to complex
-              problems, and I'm constantly learning new technologies and
-              techniques to stay at the forefront of the ever-evolving web
-              landscape.
+            <p className="text-muted-foreground whitespace-pre-line">
+              {profile.aboutDescription || "With over 5 years of experience in web development, I specialize in creating responsive, accessible, and performant web applications using modern technologies."}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
@@ -34,12 +44,16 @@ export const AboutSection = () => {
                 Get In Touch
               </a>
 
-              <a
-                href=""
-                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
-              >
-                Download CV
-              </a>
+              {profile.cvUrl && (
+                <a
+                  href={profile.cvUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
+                >
+                  Download CV
+                </a>
+              )}
             </div>
           </div>
 
@@ -50,10 +64,9 @@ export const AboutSection = () => {
                   <Code className="h-6 w-6 text-primary" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg"> Web Development</h4>
+                  <h4 className="font-semibold text-lg"> AI Developer </h4>
                   <p className="text-muted-foreground">
-                    Creating responsive websites and web applications with
-                    modern frameworks.
+                    Building applications using LLMs (RAG, embeddings, prompt engineering) with APIs like OpenAI/OpenRouter.
                   </p>
                 </div>
               </div>
@@ -64,10 +77,9 @@ export const AboutSection = () => {
                   <User className="h-6 w-6 text-primary" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg">UI/UX Design</h4>
+                  <h4 className="font-semibold text-lg"> Machine Learning Developer </h4>
                   <p className="text-muted-foreground">
-                    Designing intuitive user interfaces and seamless user
-                    experiences.
+                    Developing predictive and neural network models using Scikit-learn, TensorFlow, and keras .
                   </p>
                 </div>
               </div>
@@ -79,10 +91,9 @@ export const AboutSection = () => {
                 </div>
 
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg">Project Management</h4>
+                  <h4 className="font-semibold text-lg">Full Stack Developer </h4>
                   <p className="text-muted-foreground">
-                    Leading projects from conception to completion with agile
-                    methodologies.
+                    Developing RESTful APIs, handling backend logic with Python (Django/Flask) and Node.js, and integrating databases efficiently.
                   </p>
                 </div>
               </div>

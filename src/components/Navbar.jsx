@@ -7,7 +7,10 @@ const navItems = [
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Education", href: "#education" },
   { name: "Contact", href: "#contact" },
+  { name: "Admin", href: "/admin", isExternal: true },
 ];
 
 export const Navbar = () => {
@@ -35,22 +38,32 @@ export const Navbar = () => {
           href="#hero"
         >
           <span className="relative z-10">
-            <span className="text-glow text-foreground"> PedroTech </span>{" "}
+            <span className="text-glow text-foreground"> Fayaz's </span>{" "}
             Portfolio
           </span>
         </a>
 
         {/* desktop nav */}
         <div className="hidden md:flex space-x-8">
-          {navItems.map((item, key) => (
-            <a
-              key={key}
-              href={item.href}
-              className="text-foreground/80 hover:text-primary transition-colors duration-300"
-            >
-              {item.name}
-            </a>
-          ))}
+          {navItems.map((item, key) =>
+            item.isExternal ? (
+              <a
+                key={key}
+                href={item.href}
+                className="text-foreground/80 hover:text-primary transition-colors duration-300"
+              >
+                {item.name}
+              </a>
+            ) : (
+              <a
+                key={key}
+                href={item.href}
+                className="text-foreground/80 hover:text-primary transition-colors duration-300"
+              >
+                {item.name}
+              </a>
+            )
+          )}
         </div>
 
         {/* mobile nav */}
@@ -73,16 +86,27 @@ export const Navbar = () => {
           )}
         >
           <div className="flex flex-col space-y-8 text-xl">
-            {navItems.map((item, key) => (
-              <a
-                key={key}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
+            {navItems.map((item, key) =>
+              item.isExternal ? (
+                <a
+                  key={key}
+                  href={item.href}
+                  className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <a
+                  key={key}
+                  href={item.href}
+                  className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              )
+            )}
           </div>
         </div>
       </div>

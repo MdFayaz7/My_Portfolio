@@ -42,13 +42,23 @@ In this tutorial, you'll learn how to build a modern portfolio website using **R
 
 ## ⚙️ Tech Stack
 
+### Frontend
 * **React** – Component-based UI development
 * **Vite** – Lightning-fast build tool
 * **TailwindCSS** – Utility-first CSS for styling
 * **Lucide Icons** – Clean and beautiful icon pack
 * **Radix UI** – Accessible component primitives
-* **TypeScript (optional)** – Type safety and tooling
-* **GitHub & Vercel** – Deployment
+
+### Backend
+* **Node.js & Express** – RESTful API server
+* **MongoDB** – Database for storing portfolio data
+* **Multer** – File upload handling
+* **JWT** – Authentication for admin panel
+* **bcryptjs** – Password hashing
+
+### Deployment
+* **GitHub & Vercel** – Frontend deployment
+* **MongoDB Atlas** – Cloud database (or local MongoDB)
 
 ---
 
@@ -75,6 +85,16 @@ In this tutorial, you'll learn how to build a modern portfolio website using **R
 * 📩 **Contact Section**
   Social icons + responsive contact form with toast notifications
 
+* 👤 **Profile Picture**
+  Display your profile picture in the hero section
+
+* 🔐 **Admin Panel**
+  Full CRUD interface to manage profile, skills, and projects
+  - Upload profile and project images
+  - Add, edit, and delete skills
+  - Add, edit, and delete projects
+  - Update profile information and descriptions
+
 * 🚀 **One-Click Deployment**
   Easily host your site with Vercel and GitHub
 
@@ -84,19 +104,94 @@ In this tutorial, you'll learn how to build a modern portfolio website using **R
 
 ### Prerequisites
 
-* [Node.js](https://nodejs.org/)
+* [Node.js](https://nodejs.org/) (v16 or higher)
+* [MongoDB](https://www.mongodb.com/try/download/community) (or MongoDB Atlas account)
 * [Git](https://git-scm.com/)
 
-### Clone and Run
+### Setup Instructions
 
+1. **Clone the repository**
 ```bash
 git clone https://github.com/yourusername/react-tailwind-portfolio.git
 cd react-tailwind-portfolio
+```
+
+2. **Install frontend dependencies**
+```bash
 npm install
+```
+
+3. **Set up backend**
+```bash
+cd server
+npm install
+```
+
+4. **Configure environment variables**
+
+Create a `.env` file in the `server` directory:
+```env
+MONGODB_URI=your_mongodb_connection_string_here
+PORT=5000
+JWT_SECRET=your_jwt_secret_key_here
+```
+
+For MongoDB Atlas, your connection string will look like:
+```
+mongodb+srv://username:password@cluster.mongodb.net/portfolio?retryWrites=true&w=majority
+```
+
+For local MongoDB:
+```
+mongodb://localhost:27017/portfolio
+```
+
+5. **Create frontend environment file**
+
+Create a `.env` file in the root directory:
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+6. **Start the backend server**
+```bash
+cd server
+npm run dev
+```
+
+The backend will run on [http://localhost:5000](http://localhost:5000)
+
+7. **Start the frontend (in a new terminal)**
+```bash
 npm run dev
 ```
 
 Your app will be available at: [http://localhost:5173](http://localhost:5173)
+
+### Initial Admin Setup
+
+1. **Create an admin account**
+
+You can create an admin account by making a POST request to `/api/auth/register`:
+
+```bash
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"yourpassword"}'
+```
+
+Or use a tool like Postman to make the request.
+
+2. **Access the admin panel**
+
+Navigate to [http://localhost:5173/admin](http://localhost:5173/admin) and login with your credentials.
+
+3. **Start managing your portfolio**
+
+- Upload your profile picture
+- Add your skills with proficiency levels
+- Add projects with images, descriptions, and links
+- Update your profile information
 
 ---
 
