@@ -8,9 +8,9 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server-install": "cd server && npm install",
+    "server-install": "npm install --prefix server",
     "install-all": "npm install && npm run server-install",
-    "render-build": "npm install && cd server && npm install && cd .. && npm run build",
+    "render-build": "npm install && npm run server-install && npm run build",
     "start": "cd server && node server.js"
   },
   "dependencies": {
